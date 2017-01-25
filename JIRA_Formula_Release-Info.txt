@@ -1,0 +1,34 @@
+<!-- @@Formula:
+import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.project.ProjectManager;
+import com.atlassian.jira.security.roles.*;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.component.ComponentAccessor;
+import com.atlassian.crowd.embedded.api.CrowdService;
+
+// Aktuellen Benutzer ermitteln
+currentUser = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
+
+ComponentManager componentManager = ComponentManager.getInstance();
+IssueManager issueManager = ComponentManager.getInstance().getIssueManager();
+ProjectManager projectManager = componentManager.getProjectManager();
+
+myIssue = issueManager.getIssueObject("RPL-522");
+
+ProjectRoleManager projectRoleManager = ComponentManager.getComponentInstanceOfType(ProjectRoleManager.class);
+ProjectRoleActors projectRoleActors = projectRoleManager.getProjectRoleActors(projectRoleManager.getProjectRole("Releasemanager"), myIssue.getProjectObject());
+if (projectRoleActors.getUsers().contains(currentUser)) {
+   hatRolle = true;
+}
+else {
+   hatRolle = false;
+}
+
+
+if(!hatRolle) {
+   output = null;
+} else {
+output = "<a id='releaseInfoEMailLink1' onclick=\"jQuery(this).hide();jQuery('#releaseInfoEMailLink2').show();\" target='_BLANK' href='" + issue.get("BAPO-WebHook-URL") + "/releaseinfoemail?rpl=" + issue.get("issuekey") + "&benutzerid='>Release-Info-E-Mail versenden</a><a id='releaseInfoEMailLink2' onclick=\"jQuery(this).hide();jQuery('#releaseInfoEMailLink1').show();\" style='display:none;' href='#' >Zum Versenden erneut drücken!</a><script>jQuery(\"#releaseInfoEMailLink1\").attr(\"href\", jQuery(\"#releaseInfoEMailLink1\").attr(\"href\") + JIRA.Users.LoggedInUser.userName());</script>";
+}
+return output;
+-->
